@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touristo Login</title>
+  <link rel="stylesheet" href="st.css">
+  <script>
+    function validateForm() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+      
+      // Check if username and password are entered
+      if (username === "" || password === "") {
+        alert("Please enter both username and password.");
+        return false;
+      }
+      
+      // Redirect to index.html after successful form submission
+      window.location.href = "index.html";
+      return false; // Prevent form submission
+    }
+  </script>
+</head>
+<body background="https://static.vecteezy.com/system/resources/previews/026/703/721/non_2x/simple-abstract-background-with-yellow-lines-in-the-composition-vector.jpg">
+  <div class="login-container">
+    <div class="logo">
+      <img src="https://cdn-icons-png.freepik.com/256/15689/15689047.png?ga=GA1.1.1220442358.1727784879&semt=ais_hybrid" alt="Touristo Logo">
+    </div>
+    <form action="#" method="POST" class="login-form" onsubmit="return validateForm()">
+      <h2>Login to Touristo</h2>
+      <div class="input-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required placeholder="Enter your username">
+      </div>
+      <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required placeholder="Enter your password">
+      </div>
+      <button type="submit" class="btn">Login</button>
+      <p class="signup-text">Don't have an account? <a href="nwe1.html">Sign up</a></p>
+    </form>
+  </div>
+</body>
+</html>

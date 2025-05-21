@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Touristo Alerts & Notifications</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            margin: 0;
+            flex-direction: column; /* Ensure elements are aligned vertically */
+        }
+
+        /* Notification Popup */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff7b7b;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none; /* Hidden by default */
+        }
+
+        /* Alarm Form */
+        .alarm-form {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-top: 20px; /* Space between the note and form */
+        }
+
+        .alarm-form input[type="date"],
+        .alarm-form input[type="time"],
+        .alarm-form input[type="text"],
+        .alarm-form input[type="button"] {
+            padding: 10px;
+            font-size: 1em;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+        }
+
+        .alarm-form input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .alarm-form input[type="button"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Note styling */
+        .note {
+            background-color: #ffffe0;
+            color: #000000;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Note Section -->
+<div class="note">
+    <p><strong>Note:</strong> Set an alarm to get notified when it's time for your scheduled tour. Just choose the date, time, and enter a custom message, then press the "Set Alarm" button to receive a notification at the selected time!</p>
+</div>
+
+<!-- Notification Popup -->
+<div class="notification" id="notification">
+    Time's up! Your scheduled alert is here!
+</div>
+
+<!-- Alarm Form -->
+<div class="alarm-form">
+    <h2>Set Your Tour Alarm</h2>
+    <label for="alarmDate">Choose Date:</label>
+    <input type="date" id="alarmDate">
+    <label for="alarmTime">Choose Time:</label>
+    <input type="time" id="alarmTime">
+    <label for="alarmMessage">Custom Message:</label>
+    <input type="text" id="alarmMessage" placeholder="Enter your message here">
+    <input type="button" value="Set Alarm" onclick="setAlarm()">
+</div>
+
+<!-- Audio for alarm sound -->
+<audio id="alarmSound" src="https://www.soundsnap.com/designed_livestreaming_user_interface_basic_bit_shots_sound_effect_3_3" preload="auto"></audio>
+
+
+<script>
+    let alarmTime;
+    let alarmTimeout;
+
+    // Function to set an alarm
+    function setAlarm() {
+        const dateInput = document.getElementById("alarmDate").value;
+        const timeInput = document.getElementById("alarmTime").value;
+        const messageInput = document.getElementById("alarmMessage").value;
+
+        if (!dateInput || !timeInput) {
+            alert("Please select both a date and time for the alarm.");
+            return;
+        }
+
+        if (!messageInput) {
+            alert("Please enter a custom message for the alarm.");
+            return;
+        }
+
+        alarmTime = new Date(dateInput + 'T' + timeInput + ':00');
+        const timeToAlarm = alarmTime - new Date();
+
+        if (timeToAlarm >= 0) {
+            alarmTimeout = setTimeout(() => triggerNotification(messageInput), timeToAlarm);
+            alert("Alarm set for " + alarmTime.toLocaleString());
+        } else {
+            alert("Selected date and time is in the past! Please choose a future time.");
+        }
+    }
+
+    // Function to trigger notification and play sound
+    function triggerNotification(message) {
+        const notification = document.getElementById("notification");
+        notification.textContent = message;  // Set the custom message in the notification
+        notification.style.display = "block";
+
+        // Play the alarm sound
+        const alarmSound = document.getElementById("alarmSound");
+        alarmSound.play();
+
+        // Hide notification after 10 seconds
+        setTimeout(() => {
+            notification.style.display = "none";
+        }, 10000);
+    }
+</script>
+
+</body>
+</html>

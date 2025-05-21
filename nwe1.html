@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Touristo Login</title>
+  <link rel="stylesheet" href="st1.css">
+</head>
+<body background="https://static.vecteezy.com/system/resources/previews/026/703/721/non_2x/simple-abstract-background-with-yellow-lines-in-the-composition-vector.jpg">
+
+  <div class="container">
+    <div class="logo">
+      <center><h1>TOURISTO</h1></center><br>
+    </div>
+    <form id="loginForm" onsubmit="return validateForm()">
+      <h2>Sign Up</h2>
+      
+      <div class="input-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Set Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+      </div>
+
+      <!-- Updated Sign Up button -->
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Check if all fields are filled
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        alert('Please fill in all the fields.');
+        return false; // Prevent form submission
+      }
+
+      // Check if passwords match
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false; // Prevent form submission
+      }
+
+      // If validation is successful, redirect to the index.html page
+      window.location.href = 'index.html';
+      return false; // Prevent form submission since we're handling the redirect via JavaScript
+    }
+  </script>
+</body>
+</html>
